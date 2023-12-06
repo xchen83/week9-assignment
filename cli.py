@@ -9,11 +9,11 @@ def play_game():
         if game.turnCounter % 2 == 0:
             game.print_board()
             number_picked = human_player.make_move()
-            if 1 <= number_picked <= 9:
+            if number_picked in game.available_moves:
                 game.modify_array(number_picked)
                 game.other_player()
             else:
-                print("Invalid input. Please try again.")
+                print("Invalid input or move already taken. Please try again.")
             game.turnCounter += 1
         else:
             other_player_choice = bot_player.make_move()
@@ -32,7 +32,6 @@ def play_game():
             print("It's a draw!")
             break
 
-    # Record the outcome of the game
     winner = game.get_winner()
     player1 = "Human" if winner == "X" else "Bot"
     player2 = "Bot" if winner == "X" else "Human"
